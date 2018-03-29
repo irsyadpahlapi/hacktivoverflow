@@ -18,6 +18,8 @@ export default {
 <style>
 body {
   margin: 0;
+  background-image:url('https://png.pngtree.com/thumb_back/fw800/back_pic/00/05/52/7756273b2f1c4e1.png');
+  background-size : cover;
 }
 
 #app {

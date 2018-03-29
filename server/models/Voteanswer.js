@@ -10,7 +10,7 @@ const voteanswerSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:'Answer'
   },
-  vote :String
+  vote :Number
 })
 
 const Voteanswer = mongoose.model('Voteanswer', voteanswerSchema)

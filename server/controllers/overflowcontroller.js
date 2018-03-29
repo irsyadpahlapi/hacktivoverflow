@@ -64,10 +64,33 @@ module.exports = {
     })
   },
   showquestion : (req,res) => {
-    Votequestion.find().populate('idquestion').then(data => {
-      res.status(200).json({question:data})
-    }).catch(err => {
-      res.status(500).send(err)
+    Question.find().then(datas => {
+      Votequestion.find().populate('idquestion').then(data => {
+        res.status(200).json({question:datas,votequestion:data})
+      }).catch(err => {
+        res.status(500).send(err)
+      })
+    })
+  },
+  showquestiondetail : (req,res) => {
+    Question.findOne( {_id:req.params.id} ).then(pertanyaan => {
+      Votequestion.find({idquestion:req.params.id}).populate('idquestion').then(votepertanyaan => {
+        Answer.find( {idquestion:req.params.id} ).then(answer => {
+          Voteanswer.find().populate('idquestion').then(voteanswer => {
+            res.status(200).json(
+              {
+                question:pertanyaan,
+                votequestion:votepertanyaan,
+                answer:answer,
+                voteanswer:voteanswer
+              })
+          }).catch(err => {
+            res.status(500).send(err)
+          })
+        })
+      }).catch(err => {
+        res.status(500).send(err)
+      })
     })
   },
   updatequestion : (req,res) => {
